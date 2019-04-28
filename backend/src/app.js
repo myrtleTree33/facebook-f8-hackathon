@@ -8,6 +8,7 @@ import cors from 'cors';
 import logger from './logger';
 
 import baseRoutes from './routes/baseRoutes';
+import pageRoutes from './routes/pageRoutes';
 
 // connect to Mongo DB
 logger.info(`Connecting to ${process.env.MONGO_URI}..`);
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Routes
 app.use('/', baseRoutes);
+app.use('/page', pageRoutes);
 // app.use('/user', userRoutes);
 
 // Catch 404 and forward to error handler
