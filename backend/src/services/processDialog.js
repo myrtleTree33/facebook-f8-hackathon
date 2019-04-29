@@ -65,12 +65,15 @@ export default async event => {
   const user = await User.findOne({ userId });
 
   if (!user || !user.cities) {
-    return sendTextMessage(userId, 'Hello!  Where are you from?');
+    sendTextMessage(userId, 'Hello!  Where are you from?');
+    return;
   } else if (!user.citiesInterested) {
-    return sendTextMessage(userId, 'Which cities are you keen to explore?');
+    sendTextMessage(userId, 'Which cities are you keen to explore?');
+    return;
   } else if (!user.citiesTraveled) {
-    return sendTextMessage(userId, 'Which have you travled to?');
+    sendTextMessage(userId, 'Which have you travled to?');
+    return;
   }
 
-  return sendTextMessage(userId, result.fulfillmentText);
+  sendTextMessage(userId, result.fulfillmentText);
 };
