@@ -2,6 +2,7 @@ import { Router } from 'express';
 import logger from '../logger';
 import Question from '../models/Question';
 import processDialog from '../services/processDialog';
+import initBot from '.././services/initChatbot'
 
 const routes = Router();
 
@@ -71,7 +72,7 @@ routes.post('/webhook', (req, res) => {
         console.log('********************');
         console.log(event);
         console.log('********************');
-
+        initBot();
         if (event.message && event.message.text) {
           processDialog(event);
         }
