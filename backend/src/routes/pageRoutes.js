@@ -57,7 +57,7 @@ routes.get('/webhook', (req, res, next) => {
 routes.post('/webhook', (req, res) => {
   const { body } = req;
   console.log(`Received payload=${JSON.stringify(body)}`);
-  res.json({ hello: 'world' });
+
   if (body.object === 'page') {
     // TODO: Find and do something to the event page
     // TODO: save user pid
