@@ -36,7 +36,7 @@ const sendTextMessage = async (userId, text) => {
   console.log('************');
 
   return await axios.post(
-    `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+    `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
     {
       messaging_type: 'RESPONSE',
       recipient: {
