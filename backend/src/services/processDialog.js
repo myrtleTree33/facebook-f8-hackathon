@@ -1,6 +1,7 @@
 import fetch from 'node-fetch';
 import dialogflow from 'dialogflow';
 import axios from 'axios';
+import User from '../models/User';
 
 const {
   PROJECT_ID,
@@ -27,12 +28,7 @@ const sessionClient = new dialogflow.SessionsClient(config);
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 const sendTextMessage = async (userId, text) => {
-  console.log('--------------------------------------------------');
-  console.log(userId);
-  console.log(text);
-  console.log('--------------------------------------------------');
-
-  return await axios.post(
+  return axios.post(
     `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
     {
       messaging_type: 'RESPONSE',
@@ -47,12 +43,13 @@ const sendTextMessage = async (userId, text) => {
 };
 
 export default async event => {
-  console.log(JSON.stringify(event));
-  console.log('*************');
-  console.log(event);
-  console.log('*************');
   const userId = event.sender.id;
   const message = event.message.text;
+
+  const user = await User.findOne(userId);
+  if (!user || !user.cities || !user.citiesInterested || !user.citiesTraveled) {
+    return sendTextMessage(userId, 'Hello!  Where are you from?');
+  }
 
   const request = {
     session: sessionPath,

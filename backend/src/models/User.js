@@ -8,49 +8,48 @@ let mongooseHidden = require('mongoose-hidden')();
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-  username: {
+  userId: {
     type: String,
     required: true
   },
   cities: {
     type: [String],
-    required: true
+    default: []
   },
   countries: {
     type: [String],
-    required: true
+    default: []
   },
   type: {
     type: String,
-    required: true
+    default: []
   },
   citiesInterested: {
     type: [String],
-    required: true
+    default: []
   },
   countriesInterested: {
     type: [String],
-    required: true
+    default: []
   },
   citiesTraveled: {
     type: [String],
-    required: true
+    default: []
   },
   countriesTraveled: {
     type: [String],
-    required: true
+    default: []
   },
   cityBorn: {
     type: [String],
-    required: true
+    default: []
   },
   countryBorn: {
     type: [String],
-    required: true
+    default: []
   },
   dateCreated: {
     type: Date,
-    required: true,
     default: Date.now,
     select: false
   }
