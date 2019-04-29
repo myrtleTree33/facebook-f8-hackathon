@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import dialogflow from 'dialogflow';
+import axios from 'axios';
 
 const {
   PROJECT_ID,
@@ -33,27 +34,19 @@ const sendTextMessage = async (userId, text) => {
   console.log(userId);
   console.log(text);
   console.log('************');
-  const result = await fetch(
+
+  return axios.post(
     `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
     {
-      headers: {
-        'Content-Type': 'application/json'
+      messaging_type: 'RESPONSE',
+      recipient: {
+        id: userId
       },
-      method: 'POST',
-      body: JSON.stringify({
-        messaging_type: 'RESPONSE',
-        recipient: {
-          id: userId
-        },
-        message: {
-          text
-        }
-      })
+      message: {
+        text
+      }
     }
   );
-
-  console.log(JSON.stringify(result));
-  return Promise.resolve();
 };
 
 export default async event => {
