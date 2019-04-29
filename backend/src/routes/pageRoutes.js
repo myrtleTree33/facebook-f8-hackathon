@@ -68,13 +68,12 @@ routes.post('/webhook', (req, res) => {
 
         if (event.message && event.message.text) {
           // Do not process if sender is the BOT ID
-          if (event.sender.id === BOT_ID) {
-            return;
+          if (event.sender.id !== BOT_ID) {
+            console.log('********************');
+            console.log(event);
+            console.log('********************');
+            processDialog(event);
           }
-          console.log('********************');
-          console.log(event);
-          console.log('********************');
-          processDialog(event);
         }
       });
     });
