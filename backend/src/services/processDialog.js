@@ -47,14 +47,13 @@ export default async event => {
   const message = event.message.text;
 
   const user = await User.findOne({ userId });
-  if (!user || !user.cities || !user.citiesInterested || !user.citiesTraveled) {
-    if (!user.cities) {
-      return sendTextMessage(userId, 'Hello!  Where are you from?');
-    } else if (!user.citiesInterested) {
-      return sendTextMessage(userId, 'Which cities are you keen to explore?');
-    } else if (!user.citiesTraveled) {
-      return sendTextMessage(userId, 'Which have you travled to?');
-    }
+
+  if (!user || !user.cities) {
+    return sendTextMessage(userId, 'Hello!  Where are you from?');
+  } else if (!user.citiesInterested) {
+    return sendTextMessage(userId, 'Which cities are you keen to explore?');
+  } else if (!user.citiesTraveled) {
+    return sendTextMessage(userId, 'Which have you travled to?');
   }
 
   const request = {
