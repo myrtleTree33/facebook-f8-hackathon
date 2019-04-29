@@ -22,7 +22,7 @@ const userSchema = new Schema({
   },
   type: {
     type: String,
-    default: []
+    default: 'NORMAL'
   },
   citiesInterested: {
     type: [String],
