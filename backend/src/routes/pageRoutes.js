@@ -64,7 +64,7 @@ routes.post('/webhook', (req, res) => {
   if (req.body.object === 'page') {
     req.body.entry.forEach(entry => {
       entry.messaging.forEach(event => {
-        // initBot();
+        initBot();
 
         if (event.message && event.message.text) {
           // Do not process if sender is the BOT ID
