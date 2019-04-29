@@ -22,10 +22,6 @@ const config = {
   }
 };
 
-console.log('********************');
-console.log(DIALOGFLOW_PRIVATE_KEY);
-console.log('********************');
-
 const sessionClient = new dialogflow.SessionsClient(config);
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
@@ -33,6 +29,9 @@ const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 // Don't forget to add it to your `variables.env` file.
 
 const sendTextMessage = async (userId, text) => {
+  console.log('************');
+  console.log(text);
+  console.log('************');
   return fetch(`https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, {
     headers: {
       'Content-Type': 'application/json'
