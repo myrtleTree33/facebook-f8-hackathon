@@ -57,12 +57,12 @@ routes.get('/webhook', (req, res, next) => {
 
 routes.post('/webhook ', (req, res) => {
   const { body } = req;
+  logger.info(`Received payload=${JSON.stringify(req.body)}`);
   if (body.object === 'page') {
     body.entry.forEach(entry => {
       let webhookEvent = entry.messaging[0];
       let senderPsid = webhookEvent.sender.id;
       logger.info(`Sender PSID: ${senderPsid}`);
-      logger.info(`Received payload=${JSON.stringify(entry.messaging)}`);
 
       if (webhookEvent.message) {
         // handleMessage(senderPsid, webhookEvent.message);
