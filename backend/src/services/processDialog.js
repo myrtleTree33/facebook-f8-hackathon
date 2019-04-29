@@ -62,7 +62,7 @@ export default async event => {
   console.log(JSON.stringify(result));
 
   const {
-    intent: { intentName }
+    intent: { displayName: intentName }
   } = result;
 
   // Do actual logic here
