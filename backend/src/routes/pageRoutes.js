@@ -57,7 +57,9 @@ routes.get('/webhook', (req, res, next) => {
 
 routes.post('/webhook ', (req, res) => {
   const { body } = req;
-  logger.info(`Received payload=${JSON.stringify(req.body)}`);
+  console.log('-------------------------------');
+  console.log(`Received payload=${JSON.stringify(req.body)}`);
+  console.log('-------------------------------');
   if (body.object === 'page') {
     body.entry.forEach(entry => {
       let webhookEvent = entry.messaging[0];
