@@ -81,12 +81,12 @@ export default async event => {
 
   console.log('GOT HERE!!! ----------------------');
 
-  if (!user.cities) {
+  if (!user.cities || !user.cities.length) {
     if (intentName === 'CITIES') {
       return User.findOneAndUpdate({ userId }, { cities: [message] }, { upsert: true, new: true });
     }
     return sendTextMessage(userId, 'Hello!  Where are you from?');
-  } else if (!user.citiesInterested) {
+  } else if (!user.citiesInterested || !user.citiesInterested.length) {
     if (intentName === 'CITIES') {
       return User.findOneAndUpdate(
         { userId },
@@ -95,7 +95,7 @@ export default async event => {
       );
     }
     return sendTextMessage(userId, 'Which cities are you keen to explore?');
-  } else if (!user.citiesTraveled) {
+  } else if (!user.citiesTraveled || !user.citiesTraveled.length) {
     if (intentName === 'CITIES') {
       return User.findOneAndUpdate(
         { userId },
