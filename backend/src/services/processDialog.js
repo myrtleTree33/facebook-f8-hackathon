@@ -83,25 +83,32 @@ export default async event => {
 
   if (!user.cities || !user.cities.length) {
     if (intentName === 'CITIES') {
-      return User.findOneAndUpdate({ userId }, { cities: [message] }, { upsert: true, new: true });
+      await User.findOneAndUpdate({ userId }, { cities: [message] }, { upsert: true, new: true });
+      return sendTextMessage(
+        `OK!  I've set your home city to ${message}.  Which cities are you keen to explore?`
+      );
     }
     return sendTextMessage(userId, 'Hello!  Where are you from?');
   } else if (!user.citiesInterested || !user.citiesInterested.length) {
     if (intentName === 'CITIES') {
-      return User.findOneAndUpdate(
+      await User.findOneAndUpdate(
         { userId },
         { citiesInterested: [message] },
         { upsert: true, new: true }
+      );
+      return sendTextMessage(
+        `OK!  You're interested in exploring ${message}.  Which cities have you visited?`
       );
     }
     return sendTextMessage(userId, 'Which cities are you keen to explore?');
   } else if (!user.citiesTraveled || !user.citiesTraveled.length) {
     if (intentName === 'CITIES') {
-      return User.findOneAndUpdate(
+      await User.findOneAndUpdate(
         { userId },
         { citiesTraveled: [message] },
         { upsert: true, new: true }
       );
+      return sendTextMessage(`OK!  You're interested in traveling ${message}.  Let's begin! (:`);
     }
     return sendTextMessage(userId, 'Which have you travled to?');
   }
