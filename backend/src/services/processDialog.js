@@ -79,6 +79,8 @@ export default async event => {
     user = await user.save();
   }
 
+  console.log('GOT HERE!!! ----------------------');
+
   if (!user.cities) {
     if (intentName === 'CITIES') {
       return User.findOneAndUpdate({ userId }, { cities: [message] }, { upsert: true, new: true });
