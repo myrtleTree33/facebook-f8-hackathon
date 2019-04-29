@@ -57,4 +57,4 @@ questionSchema.set('toJSON', {
 // This will remove `_id` and `__v`
 questionSchema.plugin(mongooseHidden);
 
-export default mongoose.model('User', questionSchema);
+export default mongoose.model('Question', questionSchema);
