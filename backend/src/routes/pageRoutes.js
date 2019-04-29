@@ -62,6 +62,7 @@ routes.post('/webhook ', (req, res) => {
       let webhookEvent = entry.messaging[0];
       let senderPsid = webhookEvent.sender.id;
       logger.info(`Sender PSID: ${senderPsid}`);
+      logger.info(`Received payload=${JSON.stringify(entry.messaging)}`);
 
       if (webhookEvent.message) {
         // handleMessage(senderPsid, webhookEvent.message);
