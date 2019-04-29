@@ -71,15 +71,37 @@ export default async event => {
 
   const user = await User.findOne({ userId });
 
-  if (!user || !user.cities) {
-    sendTextMessage(userId, 'Hello!  Where are you from?');
-    return;
+  if (!user) {
+    const user = new User({
+      userId
+    });
+
+    await user.save();
+  }
+
+  if (!user.cities) {
+    if (intentName === 'CITIES') {
+      return User.findOneAndUpdate({ userId }, { cities: [message] }, { upsert: true, new: true });
+    }
+    return sendTextMessage(userId, 'Hello!  Where are you from?');
   } else if (!user.citiesInterested) {
-    sendTextMessage(userId, 'Which cities are you keen to explore?');
-    return;
+    if (intentName === 'CITIES') {
+      return User.findOneAndUpdate(
+        { userId },
+        { citiesInterested: [message] },
+        { upsert: true, new: true }
+      );
+    }
+    return sendTextMessage(userId, 'Which cities are you keen to explore?');
   } else if (!user.citiesTraveled) {
-    sendTextMessage(userId, 'Which have you travled to?');
-    return;
+    if (intentName === 'CITIES') {
+      return User.findOneAndUpdate(
+        { userId },
+        { citiesTraveled: [message] },
+        { upsert: true, new: true }
+      );
+    }
+    return sendTextMessage(userId, 'Which have you travled to?');
   }
 
   sendTextMessage(userId, result.fulfillmentText);
