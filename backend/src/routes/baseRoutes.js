@@ -6,7 +6,6 @@ const routes = Router();
  * GET home page
  */
 routes.get('/', (req, res) => {
-  console.log('************');
   res.json({ message: 'Welcome to starter-backend!' });
 });
 

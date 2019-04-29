@@ -58,7 +58,7 @@ routes.get('/webhook', (req, res, next) => {
 routes.post('/webhook ', (req, res) => {
   const { body } = req;
   console.log('-------------------------------');
-  console.log(`Received payload=${JSON.stringify(req.body)}`);
+  console.log(`Received payload=${JSON.stringify(body)}`);
   console.log('-------------------------------');
   res.json({ hello: 'world' });
   // if (body.object === 'page') {
