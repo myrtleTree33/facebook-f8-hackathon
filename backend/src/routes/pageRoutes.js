@@ -65,7 +65,7 @@ routes.post('/webhook', (req, res) => {
       entry.messaging.forEach(event => {
         // Do not process if sender is the BOT ID
         if (event.sender.id === BOT_ID) {
-          return res.status(200).end();
+          return res.status(200).send('EVENT_RECEIVED');
         }
 
         console.log('********************');
@@ -73,12 +73,12 @@ routes.post('/webhook', (req, res) => {
         console.log('********************');
 
         if (event.message && event.message.text) {
-          return processDialog(event);
+          processDialog(event);
         }
       });
     });
 
-    return res.status(200).end();
+    return res.status(200).send('EVENT_RECEIVED');
   }
 
   // if (body.object === 'page') {
