@@ -60,22 +60,23 @@ routes.post('/webhook ', (req, res) => {
   console.log('-------------------------------');
   console.log(`Received payload=${JSON.stringify(req.body)}`);
   console.log('-------------------------------');
-  if (body.object === 'page') {
-    body.entry.forEach(entry => {
-      let webhookEvent = entry.messaging[0];
-      let senderPsid = webhookEvent.sender.id;
-      logger.info(`Sender PSID: ${senderPsid}`);
+  res.json({ hello: 'world' });
+  // if (body.object === 'page') {
+  //   body.entry.forEach(entry => {
+  //     let webhookEvent = entry.messaging[0];
+  //     let senderPsid = webhookEvent.sender.id;
+  //     logger.info(`Sender PSID: ${senderPsid}`);
 
-      if (webhookEvent.message) {
-        // handleMessage(senderPsid, webhookEvent.message);
-      } else if (webhookEvent.postback) {
-        // handlePostback(senderPsid, webhookEvent.postback);
-      }
-    });
-    res.send('EVENT_RECEIVED');
-  } else {
-    res.sendStatus(404);
-  }
+  //     if (webhookEvent.message) {
+  //       // handleMessage(senderPsid, webhookEvent.message);
+  //     } else if (webhookEvent.postback) {
+  //       // handlePostback(senderPsid, webhookEvent.postback);
+  //     }
+  //   });
+  //   res.send('EVENT_RECEIVED');
+  // } else {
+  //   res.sendStatus(404);
+  // }
 });
 
 export default routes;
