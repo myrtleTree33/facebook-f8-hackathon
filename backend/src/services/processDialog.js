@@ -28,20 +28,20 @@ const sessionClient = new dialogflow.SessionsClient(config);
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 const sendTextMessage = async (userId, text) => {
-  // try {
-  await axios.post(
-    `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
-    {
-      messaging_type: 'RESPONSE',
-      recipient: {
-        id: userId
-      },
-      message: {
-        text
+  try {
+    await axios.post(
+      `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+      {
+        messaging_type: 'RESPONSE',
+        recipient: {
+          id: userId
+        },
+        message: {
+          text
+        }
       }
-    }
-  );
-  // } catch (e) {}
+    );
+  } catch (e) {}
 };
 
 export default async event => {
