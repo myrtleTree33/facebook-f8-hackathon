@@ -26,9 +26,6 @@ const config = {
 const sessionClient = new dialogflow.SessionsClient(config);
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
-// Remember the Page Access Token you got from Facebook earlier?
-// Don't forget to add it to your `variables.env` file.
-
 const sendTextMessage = async (userId, text) => {
   console.log('************');
   console.log(userId);
@@ -65,6 +62,7 @@ export default async event => {
   };
 
   const results = await sessionClient.detectIntent(request);
+  console.log(JSON.stringify(event));
   const result = results[0].queryResult;
   return sendTextMessage(userId, result.fulfillmentText);
 };
