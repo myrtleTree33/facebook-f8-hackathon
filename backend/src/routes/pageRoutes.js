@@ -55,7 +55,7 @@ routes.get('/webhook', (req, res, next) => {
   res.send('wrong token');
 });
 
-routes.post('/webhook ', (req, res) => {
+routes.post('/webhook', (req, res) => {
   const { body } = req;
   console.log(`Received payload=${JSON.stringify(body)}`);
   res.json({ hello: 'world' });
