@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import logger from '../logger';
+import Question from '../models/Question';
 
 const routes = Router();
 
