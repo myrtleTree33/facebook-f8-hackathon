@@ -5,7 +5,7 @@ import processDialog from '../services/processDialog';
 
 const routes = Router();
 
-const { PAGE_ACCESS_TOKEN, VERIFY_TOKEN } = process.env;
+const { PAGE_ACCESS_TOKEN, VERIFY_TOKEN, BOT_ID } = process.env;
 
 // function callSendAPI( async (sender_psid, response) => {
 //   let request_body = {
@@ -67,13 +67,17 @@ routes.post('/webhook', (req, res) => {
         console.log('********************');
         console.log(event);
         console.log('********************');
+
+        if (event.sender.id === BOT_ID) {
+          return res.status(200).end();
+        }
         if (event.message && event.message.text) {
           return processDialog(event);
         }
       });
     });
 
-    res.status(200).end();
+    return res.status(200).end();
   }
 
   // if (body.object === 'page') {
