@@ -46,7 +46,7 @@ export default async event => {
   const userId = event.sender.id;
   const message = event.message.text;
 
-  const user = await User.findOne(userId);
+  const user = await User.findOne({ userId });
   if (!user || !user.cities || !user.citiesInterested || !user.citiesTraveled) {
     return sendTextMessage(userId, 'Hello!  Where are you from?');
   }
