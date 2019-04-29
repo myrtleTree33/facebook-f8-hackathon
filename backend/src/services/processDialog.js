@@ -33,21 +33,27 @@ const sendTextMessage = async (userId, text) => {
   console.log(userId);
   console.log(text);
   console.log('************');
-  return fetch(`https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify({
-      messaging_type: 'RESPONSE',
-      recipient: {
-        id: userId
+  const result = await fetch(
+    `https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+    {
+      headers: {
+        'Content-Type': 'application/json'
       },
-      message: {
-        text
-      }
-    })
-  });
+      method: 'POST',
+      body: JSON.stringify({
+        messaging_type: 'RESPONSE',
+        recipient: {
+          id: userId
+        },
+        message: {
+          text
+        }
+      })
+    }
+  );
+
+  console.log(JSON.stringify(result));
+  return Promise.resolve();
 };
 
 export default async event => {
