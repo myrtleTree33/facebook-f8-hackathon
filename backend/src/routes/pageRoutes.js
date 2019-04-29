@@ -64,9 +64,9 @@ routes.post('/webhook', (req, res) => {
     req.body.entry.forEach(entry => {
       entry.messaging.forEach(event => {
         // Do not process if sender is the BOT ID
-        // if (event.sender.id === BOT_ID) {
-        //   return res.status(200).send('EVENT_RECEIVED');
-        // }
+        if (event.sender.id === BOT_ID) {
+          return;
+        }
 
         console.log('********************');
         console.log(event);
