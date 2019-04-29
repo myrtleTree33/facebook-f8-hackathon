@@ -46,6 +46,21 @@ export default async event => {
   const userId = event.sender.id;
   const message = event.message.text;
 
+  const request = {
+    session: sessionPath,
+    queryInput: {
+      text: {
+        text: message,
+        languageCode
+      }
+    }
+  };
+  const results = await sessionClient.detectIntent(request);
+  const result = results[0].queryResult;
+  console.log(JSON.stringify(results));
+
+  // Do actual logic here
+
   const user = await User.findOne({ userId });
 
   if (!user || !user.cities) {
@@ -56,18 +71,5 @@ export default async event => {
     return sendTextMessage(userId, 'Which have you travled to?');
   }
 
-  const request = {
-    session: sessionPath,
-    queryInput: {
-      text: {
-        text: message,
-        languageCode
-      }
-    }
-  };
-
-  const results = await sessionClient.detectIntent(request);
-  console.log(JSON.stringify(results));
-  const result = results[0].queryResult;
   return sendTextMessage(userId, result.fulfillmentText);
 };
