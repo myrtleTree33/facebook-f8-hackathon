@@ -68,8 +68,7 @@ routes.post('/webhook', (req, res) => {
         console.log(event);
         console.log('********************');
         if (event.message && event.message.text) {
-          processDialog(event);
-          // processMessage(event);
+          return processDialog(event);
         }
       });
     });
