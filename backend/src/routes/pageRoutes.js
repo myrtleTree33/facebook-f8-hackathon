@@ -3,8 +3,7 @@ import logger from '../logger';
 
 const routes = Router();
 
-const { PAGE_ACCESS_TOKEN } = process.env;
-const VERIFY_TOKEN = 'VERIFY_TOKEN';
+const { PAGE_ACCESS_TOKEN, VERIFY_TOKEN } = process.env;
 
 // function callSendAPI( async (sender_psid, response) => {
 //   let request_body = {
@@ -60,17 +59,8 @@ routes.post('/webhook', (req, res) => {
   console.log(`Received payload=${JSON.stringify(body)}`);
   res.json({ hello: 'world' });
   if (body.object === 'page') {
-    body.entry.forEach(entry => {
-      let webhookEvent = entry.messaging[0];
-      let senderPsid = webhookEvent.sender.id;
-      logger.info(`Sender PSID: ${senderPsid}`);
-
-      if (webhookEvent.message) {
-        // handleMessage(senderPsid, webhookEvent.message);
-      } else if (webhookEvent.postback) {
-        // handlePostback(senderPsid, webhookEvent.postback);
-      }
-    });
+    // TODO: Find and do something to the event page
+    // TODO: save user pid
     res.send('EVENT_RECEIVED');
   } else {
     res.sendStatus(404);
