@@ -45,6 +45,7 @@ const sendTextMessage = async (userId, text) => {
 export default async event => {
   const userId = event.sender.id;
   const message = event.message.text;
+  console.log('GOT HERE------------------------');
 
   const request = {
     session: sessionPath,
