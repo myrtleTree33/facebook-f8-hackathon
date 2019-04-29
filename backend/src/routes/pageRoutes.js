@@ -2,7 +2,7 @@ import { Router } from 'express';
 import logger from '../logger';
 import Question from '../models/Question';
 import processDialog from '../services/processDialog';
-import initBot from '.././services/initChatbot'
+import initBot from '.././services/initChatbot';
 
 const routes = Router();
 
@@ -65,15 +65,15 @@ routes.post('/webhook', (req, res) => {
     req.body.entry.forEach(entry => {
       entry.messaging.forEach(event => {
         // Do not process if sender is the BOT ID
-        if (event.sender.id === BOT_ID) {
-          return;
-        }
+        // if (event.sender.id === BOT_ID) {
+        //   return;
+        // }
 
-        console.log('********************');
-        console.log(event);
-        console.log('********************');
-        initBot();
         if (event.message && event.message.text) {
+          initBot();
+          console.log('********************');
+          console.log(event);
+          console.log('********************');
           processDialog(event);
         }
       });
