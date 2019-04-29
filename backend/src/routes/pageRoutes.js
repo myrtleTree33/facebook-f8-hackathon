@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import logger from '../logger';
 import Question from '../models/Question';
+import processDialog from '../services/processDialog';
 
 const routes = Router();
 
@@ -60,13 +61,26 @@ routes.post('/webhook', (req, res) => {
   const { body } = req;
   console.log(`Received payload=${JSON.stringify(body)}`);
 
-  if (body.object === 'page') {
-    // TODO: Find and do something to the event page
-    // TODO: save user pid
-    res.send('EVENT_RECEIVED');
-  } else {
-    res.sendStatus(404);
+  if (req.body.object === 'page') {
+    req.body.entry.forEach(entry => {
+      entry.messaging.forEach(event => {
+        if (event.message && event.message.text) {
+          processDialog(event);
+          // processMessage(event);
+        }
+      });
+    });
+
+    res.status(200).end();
   }
+
+  // if (body.object === 'page') {
+  //   // TODO: Find and do something to the event page
+  //   // TODO: save user pid
+  //   res.send('EVENT_RECEIVED');
+  // } else {
+  //   res.sendStatus(404);
+  // }
 });
 
 export default routes;
