@@ -46,6 +46,7 @@ routes.get('/', (req, res) => {
 });
 
 routes.get('/webhook', (req, res, next) => {
+  console.log("webhook test")
   const hubChallenge = req.query['hub.challenge'];
   const verifyToken = req.query['hub.verify_token'];
   if (verifyToken === VERIFY_TOKEN) {
@@ -55,9 +56,9 @@ routes.get('/webhook', (req, res, next) => {
   res.send('wrong token');
 });
 
-routes.post("/webhook", function(req, res) {
+routes.post("/webhook/", function(req, res) {
   console.log("WEBHOOK GET IT WORKS");
-  var data = req.body;
+  const data = req.body;
   console.log(data);
 
   // Make sure this is a page subscription
