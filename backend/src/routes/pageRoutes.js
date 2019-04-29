@@ -68,9 +68,9 @@ routes.post('/webhook', (req, res) => {
         // if (event.sender.id === BOT_ID) {
         //   return;
         // }
+        initBot();
 
         if (event.message && event.message.text) {
-          initBot();
           console.log('********************');
           console.log(event);
           console.log('********************');
