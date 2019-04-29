@@ -64,6 +64,9 @@ routes.post('/webhook', (req, res) => {
   if (req.body.object === 'page') {
     req.body.entry.forEach(entry => {
       entry.messaging.forEach(event => {
+        console.log('********************');
+        console.log(event);
+        console.log('********************');
         if (event.message && event.message.text) {
           processDialog(event);
           // processMessage(event);
