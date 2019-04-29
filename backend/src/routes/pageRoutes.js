@@ -59,18 +59,19 @@ routes.get('/webhook', (req, res, next) => {
 
 routes.post('/webhook', (req, res) => {
   const { body } = req;
-  console.log(`Received payload=${JSON.stringify(body)}`);
 
   if (req.body.object === 'page') {
     req.body.entry.forEach(entry => {
       entry.messaging.forEach(event => {
+        // Do not process if sender is the BOT ID
+        if (event.sender.id === BOT_ID) {
+          return res.status(200).end();
+        }
+
         console.log('********************');
         console.log(event);
         console.log('********************');
 
-        if (event.sender.id === BOT_ID) {
-          return res.status(200).end();
-        }
         if (event.message && event.message.text) {
           return processDialog(event);
         }
