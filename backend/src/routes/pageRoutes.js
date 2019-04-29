@@ -65,10 +65,10 @@ routes.post('/webhook', (req, res) => {
     req.body.entry.forEach(entry => {
       entry.messaging.forEach(event => {
         // Do not process if sender is the BOT ID
-        // if (event.sender.id === BOT_ID) {
-        //   return;
-        // }
-        // initBot();
+        if (event.sender.id === BOT_ID) {
+          return;
+        }
+        initBot();
 
         if (event.message && event.message.text) {
           console.log('********************');
