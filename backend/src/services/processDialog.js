@@ -69,14 +69,14 @@ export default async event => {
 
   console.log(`INTENT NAME=${intentName}`);
 
-  const user = await User.findOne({ userId });
+  let user = await User.findOne({ userId });
 
   if (!user) {
-    const user = new User({
+    user = new User({
       userId
     });
 
-    await user.save();
+    user = await user.save();
   }
 
   if (!user.cities) {
