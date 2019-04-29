@@ -48,6 +48,9 @@ const sendTextMessage = async (userId, text) => {
 
 export default async event => {
   console.log(JSON.stringify(event));
+  console.log('*************');
+  console.log(event);
+  console.log('*************');
   const userId = event.sender.id;
   const message = event.message.text;
 
