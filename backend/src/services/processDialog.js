@@ -59,9 +59,15 @@ export default async event => {
   };
   const results = await sessionClient.detectIntent(request);
   const result = results[0].queryResult;
-  console.log(JSON.stringify(results));
+  console.log(JSON.stringify(result));
+
+  const {
+    intent: { displayName: intentName }
+  } = result;
 
   // Do actual logic here
+
+  console.log(`INTENT NAME=${intentName}`);
 
   const user = await User.findOne({ userId });
 
