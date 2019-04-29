@@ -10,6 +10,7 @@ const makeGreeting = () =>{
 }
 
 const makePersistantMenu = () =>{
+    console.log("makePersistantMenu");
     axios.post('https://graph.facebook.com/v2.6/me/messenger_profile', {
         params: {
             access_token: PAGE_ACCESS_TOKEN
@@ -45,8 +46,11 @@ const makePersistantMenu = () =>{
     });
 }
 
-exports.initBot = () =>{
+const initBot = () =>{
+    console.log("initBot");
     makeGreeting();
     makePersistantMenu();
 
 }
+
+export default initBot;
