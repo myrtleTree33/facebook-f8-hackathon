@@ -62,7 +62,7 @@ export default async event => {
   };
 
   const results = await sessionClient.detectIntent(request);
-  console.log(JSON.stringify(event));
+  console.log(JSON.stringify(results));
   const result = results[0].queryResult;
   return sendTextMessage(userId, result.fulfillmentText);
 };
