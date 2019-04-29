@@ -30,6 +30,7 @@ const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 const sendTextMessage = async (userId, text) => {
   console.log('************');
+  console.log(userId);
   console.log(text);
   console.log('************');
   return fetch(`https://graph.facebook.com/v2.6/me/messages?access_token=${PAGE_ACCESS_TOKEN}`, {
