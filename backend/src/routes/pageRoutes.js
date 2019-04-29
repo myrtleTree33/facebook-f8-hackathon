@@ -53,7 +53,8 @@ routes.get('/webhook', (req, res, next) => {
   }
   res.send('wrong token');
 });
-app.post("/webhook", function(req, res) {
+
+routes.post("/webhook", function(req, res) {
   console.log("WEBHOOK GET IT WORKS");
   var data = req.body;
   console.log(data);
@@ -69,11 +70,11 @@ app.post("/webhook", function(req, res) {
           // Iterate over each messaging event
           pageEntry.messaging.forEach(function(messagingEvent) {
               if (messagingEvent.optin) {
-                  receivedAuthentication(messagingEvent);
+                  // receivedAuthentication(messagingEvent);
               } else if (messagingEvent.message) {
-                  receivedMessage(messagingEvent);
+                  // receivedMessage(messagingEvent);
               } else if (messagingEvent.postback) {
-                  receivedPostback(messagingEvent);
+                  // receivedPostback(messagingEvent);
               } else {
                   console.log("Webhook received unknown messagingEvent: ", messagingEvent);
               }
