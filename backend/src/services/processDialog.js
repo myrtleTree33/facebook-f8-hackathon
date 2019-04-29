@@ -22,6 +22,10 @@ const config = {
   }
 };
 
+console.log('********************');
+console.log(DIALOGFLOW_PRIVATE_KEY);
+console.log('********************');
+
 const sessionClient = new dialogflow.SessionsClient(config);
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
