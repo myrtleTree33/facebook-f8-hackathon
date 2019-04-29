@@ -85,6 +85,7 @@ export default async event => {
     if (intentName === 'CITIES') {
       await User.findOneAndUpdate({ userId }, { cities: [message] }, { upsert: true, new: true });
       return sendTextMessage(
+        userId,
         `OK!  I've set your home city to ${message}.  Which cities are you keen to explore?`
       );
     }
@@ -97,6 +98,7 @@ export default async event => {
         { upsert: true, new: true }
       );
       return sendTextMessage(
+        userId,
         `OK!  You're interested in exploring ${message}.  Which cities have you visited?`
       );
     }
@@ -108,7 +110,10 @@ export default async event => {
         { citiesTraveled: [message] },
         { upsert: true, new: true }
       );
-      return sendTextMessage(`OK!  You're interested in traveling ${message}.  Let's begin! (:`);
+      return sendTextMessage(
+        userId,
+        `OK!  You're interested in traveling ${message}.  Let's begin! (:`
+      );
     }
     return sendTextMessage(userId, 'Which have you travled to?');
   }
