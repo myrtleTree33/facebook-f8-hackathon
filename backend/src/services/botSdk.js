@@ -27,10 +27,8 @@ async function askQuestions({ userId, maxNum = 3 }) {
   logger.info(`Asking questions=${JSON.stringify(questions2)}`);
 
   const qnPrompt =
-    ```
-  Can you help us with the following questions?
-
-  ``` + prettyPrintQns({ userId, text: questions });
+    'Can you help us with the following questions?\n\n' +
+    prettyPrintQns({ userId, text: questions });
 
   await fbSdk.sendMessage(qnPrompt);
 
