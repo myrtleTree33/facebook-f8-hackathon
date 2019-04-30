@@ -5,35 +5,54 @@ const {
   } = process.env;
 
 const makeGreeting = () =>{
-    console.log('makeGreeting')
-
+    // console.log('makeGreeting')
+    try {
+        await axios.post( 
+            `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+            {
+                "greeting":[
+                    {
+                        "locale":"default",
+                        "text":"hello.{{user_full_name}}!!! we are travelyay"
+                    }
+                ],
+               
+             },
+        ).then(response => {
+            if(response.statusCode == 200){
+                console.log('we make greeting');
+            }
+        });
+    } catch (e) {
+        console.log('error in greeting', e);
+    }
 }
 
 const makePersistantMenu = async () => {
-    console.log("makePersistantMenu");
+    // console.log("makePersistantMenu");
     try {
         await axios.post( 
             `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
             {
                 "persistent_menu":[
                     {
-                        "locale":"en_US",
-                        "composer_input_disabled": true,
+                        "locale":"default",
+                        "composer_input_disabled": false,
                         "call_to_actions":[
                             {
                                 "type":"web_url",
                                 "title": "go trapple rabbit",
-                                "url":"http://blog.kebhana.com/990",
+                                "url":"http://www.naver.com",
                                 "webview_height_ratio": "tall"
                             },{
                                 "type":"web_url",
-                                "title": "test2",
-                                "url":"http://blog.kebhana.com/990",
+                                "title": "what is travelyay",
+                                "url":"http://www.naver.com",
                                 "webview_height_ratio": "tall"
                             },{
                                 "type":"web_url",
-                                "title": "test2",
-                                "url":"http://blog.kebhana.com/990",
+                                "title": "contact us!!!",
+                                "url":"http://www.naver.com",
                                 "webview_height_ratio": "tall"
                             }
                         ]
@@ -41,15 +60,16 @@ const makePersistantMenu = async () => {
                 ]
             },
         ).then(response => {
-            console.log('response', response);
+            if(response.statusCode == 200){
+                console.log('we make persistent menu');
+            }
         });
     } catch (e) {
-        console.log('error', e);
+        console.log('error in makePersistantMenu', e);
     }
 }
 
 const initBot = () =>{
-    console.log("initBot");
     makeGreeting();
     makePersistantMenu();
 
