@@ -3,7 +3,7 @@ import logger from '../logger';
 import Question from '../models/Question';
 import processDialog from '../services/processDialog';
 import initBot from '.././services/initChatbot';
-import generic from '.././services/messageTemplate';
+import generic from '.././services/messageTemplates';
 import answer from '.././services/quickReply';
 
 const routes = Router();
