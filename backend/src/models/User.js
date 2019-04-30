@@ -16,10 +16,6 @@ const userSchema = new Schema({
     type: [String],
     default: []
   },
-  countries: {
-    type: [String],
-    default: []
-  },
   type: {
     type: String,
     default: 'NORMAL'
@@ -28,23 +24,7 @@ const userSchema = new Schema({
     type: [String],
     default: []
   },
-  countriesInterested: {
-    type: [String],
-    default: []
-  },
   citiesTraveled: {
-    type: [String],
-    default: []
-  },
-  countriesTraveled: {
-    type: [String],
-    default: []
-  },
-  cityBorn: {
-    type: [String],
-    default: []
-  },
-  countryBorn: {
     type: [String],
     default: []
   },
