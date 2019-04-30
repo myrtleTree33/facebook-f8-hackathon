@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import Qustion from '../models/Question';
 
 const routes = Router();
 
@@ -8,6 +9,27 @@ const routes = Router();
 routes.get('/', (req, res) => {
   res.json({ message: 'Welcome to starter-backend!' });
 });
+
+/**
+ * INSERT QUESTION
+ */
+
+routes.post('/question', (req, res) => {
+
+  const qustion = req.body;
+  // Qustion.insert( { qustion } )
+  let newvalue = new Qustion( { qustion } );
+  
+  Qustion.find({}).toArray((err, result)=>{
+    if (err) throw err;
+    res.json(result);
+
+  })
+  // res.json(Qustion.find());
+
+});
+
+
 
 /**
  * GET /list
