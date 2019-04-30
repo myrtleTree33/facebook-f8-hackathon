@@ -1,7 +1,7 @@
 import Question from '../models/Question';
 import fbSdk from './fbSdk';
 
-async function askQuestion({ userId, maxNum = 3 }) {
+async function askQuestions({ userId, maxNum = 3 }) {
   const questions = await Question.find({}).limit(maxNum);
 
   const questions2 = questions.map(q => {
@@ -20,3 +20,7 @@ async function askQuestion({ userId, maxNum = 3 }) {
     btnArr: questions2
   });
 }
+
+export default {
+  askQuestions
+};

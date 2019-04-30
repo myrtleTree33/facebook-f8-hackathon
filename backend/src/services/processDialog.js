@@ -5,6 +5,7 @@ import User from '../models/User';
 import geocodeService from './geocodeService';
 import Question from '../models/Question';
 import fbSdk from './fbSdk';
+import botSdk from './botSdk';
 
 const {
   PROJECT_ID,
@@ -135,11 +136,7 @@ export default async event => {
   }
 
   // Else, continue asking question logic here
-  await fbSdk.sendQuestions({
-    userId,
-    title: 'Travel questions!',
-    buttonArr: ['question 1', 'question 2']
-  });
+  await botSdk.askQuestions({ userId, maxNum: 3 });
 
   sendTextMessage(userId, result.fulfillmentText);
 };
