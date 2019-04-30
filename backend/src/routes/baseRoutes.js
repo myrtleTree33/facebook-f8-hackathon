@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import Qustion from '../models/Question';
+import Question from '../models/Question';
 
 const routes = Router();
 
@@ -16,18 +16,18 @@ routes.get('/', (req, res) => {
 
 routes.post('/question', (req, res) => {
 
-  const qustion = req.body;
+  const question = req.body;
 
   console.log('question', question);
-  Qustion.insert( { qustion } )
+  Question.insert( { question } )
 
-  Qustion.find({}).toArray((err, result)=>{
+  Question.find({}).toArray((err, result)=>{
     if (err) throw err;
     console.log('result', result);
   })
   res.json(question);
 
-  // Qustion.find(function(err, questions){
+  // Question.find(function(err, questions){
   //   if(err) return res.status(500).send({error: 'database failure'});
   //   res.json(questions);
   // })
