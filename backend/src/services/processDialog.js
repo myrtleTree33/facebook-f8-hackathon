@@ -147,12 +147,14 @@ export default async event => {
   }
 
   // Else, store the bot answers
-  const { id } = currQn;
+  const { id, city, title } = currQn;
   if (message && message !== '') {
     await new Answer({
       questionId: id,
       userId,
-      text: message
+      questionText: title,
+      text: message,
+      city
     }).save();
 
     fbSdk.sendMessage({ userId, text: 'Thanks for your answer!' });
