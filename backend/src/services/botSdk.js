@@ -14,11 +14,11 @@ function prettyPrintQns(questions) {
 async function askQuestions({ userId, maxNum = 3 }) {
   const questions = await Question.find({}).limit(maxNum);
 
-  const questions2 = questions.map(q => {
+  const questions2 = questions.map((q, i) => {
     return {
       title: q.text,
       payload: JSON.stringify({
-        id: q.questionId,
+        id: `Question ${i}`,
         title: q.text
       })
     };
