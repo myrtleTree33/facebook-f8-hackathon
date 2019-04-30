@@ -75,7 +75,7 @@ routes.post('/webhook', async (req, res) => {
         if (event.message && event.message.text) {
           // Do not process if sender is the BOT ID
           
-          if( await checkDoBasicQuestion(event.sender.id) ){
+          if( checkDoBasicQuestion(event.sender.id) ){
               processGeneric(event);
           } else if (event.sender.id !== BOT_ID){
               console.log('********************');
