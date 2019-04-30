@@ -66,20 +66,21 @@ routes.post('/webhook', (req, res) => {
   if (req.body.object === 'page') {
     req.body.entry.forEach(entry => {
       entry.messaging.forEach(event => {
-        initBot();
+        // initBot();
 
         console.log('********************');
-        console.log('event', JSON.stringify(event, null, 2))
+        console.log('event', JSON.stringify(event, null, 2));
         console.log('********************');
 
-        if (event.message.text == "Quick_Replies") {
-          answer(event);
-        } else if ( event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD' ) {
-          console.log('********************');
-          console.log('postback check');
-          console.log('********************');
-          generic(event);
-        }
+        // if (event.message.text == "Quick_Replies") {
+        //   answer(event);
+        // } else if ( event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD' ) {
+        //   console.log('********************');
+        //   console.log('postback check');
+        //   console.log('********************');
+        //   generic(event);
+        // }
+
         if (event.message && event.message.text) {
           // Do not process if sender is the BOT ID
           if (event.sender.id !== BOT_ID) {

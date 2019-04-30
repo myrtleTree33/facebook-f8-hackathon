@@ -3,6 +3,7 @@ import dialogflow from 'dialogflow';
 import axios from 'axios';
 import User from '../models/User';
 import geocodeService from './geocodeService';
+import Question from '../models/Question';
 
 const {
   PROJECT_ID,
