@@ -17,9 +17,10 @@ routes.get('/', (req, res) => {
 routes.post('/question', (req, res) => {
 
   const qustion = req.body;
-  Qustion.insert( { qustion } )
-
-  res.json(Qustion.find());
+  // Qustion.insert( { qustion } )
+  let newvalue = new Qustion( { qustion } );
+  res.json(newvalue.save());
+  // res.json(Qustion.find());
 
 });
 
