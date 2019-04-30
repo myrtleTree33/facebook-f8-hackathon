@@ -13,18 +13,9 @@ const questionSchema = new Schema({
     required: true
   },
   categories: {
-    type: [String],
-    required: true
+    type: [String]
   },
-  countryAsked: {
-    type: String,
-    required: true
-  },
-  cityAsked: {
-    type: String,
-    required: true
-  },
-  dateCreated: {
+  teCreated: {
     type: Date,
     required: true,
     default: Date.now,
