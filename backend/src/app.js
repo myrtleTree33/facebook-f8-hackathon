@@ -10,6 +10,7 @@ import logger from './logger';
 import baseRoutes from './routes/baseRoutes';
 import pageRoutes from './routes/pageRoutes';
 import citiesRoutes from './routes/citiesRoutes';
+import questionRoutes from './routes/questionRoutes';
 
 // connect to Mongo DB
 logger.info(`Connecting to ${process.env.MONGO_URI}..`);
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/', baseRoutes);
 app.use('/page', pageRoutes);
 app.use('/cities', citiesRoutes);
+app.use('/question', questionRoutes);
 // app.use('/user', userRoutes);
 
 // Catch 404 and forward to error handler
