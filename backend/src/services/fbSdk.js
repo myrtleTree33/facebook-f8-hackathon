@@ -32,7 +32,7 @@ async function sendQuestions({ userId, title, buttonArr = [] }) {
       }
     );
   } catch (e) {
-    // logger.error(e);
+    logger.error(e);
   }
 }
 
