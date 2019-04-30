@@ -11,33 +11,6 @@ routes.get('/', (req, res) => {
 });
 
 /**
- * INSERT QUESTION
- */
-
-routes.post('/question', async (req, res) => {
-
-  const {question} = req.body;
-
-  console.log('question', question);
-  // Question.insert( { question } )
-  
-  questions = new Question({
-    question
-  });
-  await questions.save();
-  res.json(questions);
-  // Question.find(function(err, questions){
-  //   if(err) return res.status(500).send({error: 'database failure'});
-  //   console.log('questions', questions)
-  //   res.json(questions);
-  // })
-
-  
-});
-
-
-
-/**
  * GET /list
  *
  * This is a sample route demonstrating
