@@ -79,6 +79,7 @@ export default async event => {
     user = await user.save();
   }
 
+  // Be nice and send a welcome message
   if (intentName === 'WELCOME') {
     sendTextMessage(userId, result.fulfillmentText);
   }
@@ -91,7 +92,7 @@ export default async event => {
         `OK!  I've set your home city to ${message}.  Which cities are you keen to explore?`
       );
     }
-    return sendTextMessage(userId, 'Hello!  Where are you from?');
+    return sendTextMessage(userId, 'Where are you from?');
   } else if (!user.citiesInterested || !user.citiesInterested.length) {
     if (intentName === 'CITIES') {
       await User.findOneAndUpdate(
@@ -118,6 +119,10 @@ export default async event => {
       );
     }
     return sendTextMessage(userId, 'Which have you traveled to?');
+  }
+
+  if (intentName === 'WELCOME') {
+    return; // Ignore as we have already sent welcome message
   }
 
   sendTextMessage(userId, result.fulfillmentText);
