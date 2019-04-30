@@ -1,5 +1,5 @@
 import logger from '../logger';
-import Axios from 'axios';
+import axios from 'axios';
 
 const { PAGE_ACCESS_TOKEN } = process.env;
 

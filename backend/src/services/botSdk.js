@@ -32,7 +32,7 @@ async function askQuestions({ userId, maxNum = 3 }) {
 
   ``` + prettyPrintQns({ userId, text: questions });
 
-  fbSdk.sendMessage(qnPrompt);
+  await fbSdk.sendMessage(qnPrompt);
 
   return fbSdk.sendQuestions({
     userId,
