@@ -9,7 +9,7 @@ routes.get('/', (req, res) => {
 });
 
 routes.get('/cities', async (req, res, next) => {
-  let query = req.q || '';
+  let query = req.query.q || '';
   query = query.trim().toLowerCase();
 
   // empty set
