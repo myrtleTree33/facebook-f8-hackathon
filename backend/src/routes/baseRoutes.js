@@ -9,6 +9,24 @@ routes.get('/', (req, res) => {
   res.json({ message: 'Welcome to starter-backend!' });
 });
 
+routes.post('/question', (req, res) => {
+
+  const qustion = req.body;
+  Qustion.insert( { qustion } )
+
+  // res.json(Qustion.find());
+  res.json({ message: 'question' });
+
+})
+.get('/question', (req, res) => {
+
+
+  res.json({ message: 'question' });
+
+});
+
+
+
 /**
  * GET /list
  *
