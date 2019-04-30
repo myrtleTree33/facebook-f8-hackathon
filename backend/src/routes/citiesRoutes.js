@@ -20,17 +20,10 @@ routes.get('/cities', async (req, res, next) => {
   console.log(`City query=${query}`);
 
   const cities = await City.find({
-    $and: [
-      {
-        $text: { $search: query }
-      },
-      {
-        cityName: {
-          $regex: _.escapeRegExp(query),
-          $options: ''
-        }
-      }
-    ]
+    cityName: {
+      $regex: _.escapeRegExp(query),
+      $options: ''
+    }
   }).limit(1000);
 
   return res.json(cities);
