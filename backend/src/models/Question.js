@@ -1,32 +1,25 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
 
-import logger from '../logger';
-
-let mongooseHidden = require('mongoose-hidden')();
+const mongooseHidden = require('mongoose-hidden')();
 
 const { Schema } = mongoose;
 
-const questionSchema = new Schema({
-  text: {
-    type: String,
-    required: true
-  },
-  categories: {
-    type: [String]
-  },
-  teCreated: {
-    type: Date,
-    required: true,
-    default: Date.now,
-    select: false
+function genId() {
+  const LENGTH = 15;
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < LENGTH; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
-});
+  return result;
+}
 
-const answerSchema = new Schema({
-  userId: {
+const questionSchema = new Schema({
+  questionId: {
     type: String,
-    required: true
+    required: true,
+    default: genId
   },
   text: {
     type: String,

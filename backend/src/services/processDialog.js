@@ -134,6 +134,7 @@ export default async event => {
     return; // Ignore as we have already sent welcome message
   }
 
+  // Else, continue asking question logic here
   await fbSdk.sendQuestions({
     userId,
     title: 'Travel questions!',
