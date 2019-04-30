@@ -20,7 +20,7 @@ async function askQuestions({ userId, maxNum = 3 }) {
   return fbSdk.sendQuestions({
     userId,
     title: 'Can you help us?',
-    btnArr: questions2
+    buttonArr: questions2
   });
 }
 
