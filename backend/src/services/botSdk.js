@@ -14,7 +14,7 @@ function prettyPrintQns(questions) {
   return result.join('\n\n');
 }
 
-async function askQuestions({ userId, maxNum = 3 }) {
+async function askQuestions({ userId, maxNum = 3, city }) {
   const questions = await Question.find({}).limit(maxNum);
 
   // format questions
@@ -23,7 +23,8 @@ async function askQuestions({ userId, maxNum = 3 }) {
       title: `Answer qn. ${i}`,
       payload: JSON.stringify({
         id: q.questionId,
-        title: q.text
+        title: q.text,
+        city
       })
     };
   });
@@ -41,7 +42,7 @@ async function askQuestions({ userId, maxNum = 3 }) {
 
   return fbSdk.sendQuestions({
     userId,
-    title: 'Select a question!',
+    title: `Select a question for ${city}!`,
     buttonArr: questions2
   });
 }
@@ -49,11 +50,11 @@ async function askQuestions({ userId, maxNum = 3 }) {
 async function processPostback(event) {
   const userId = event.sender.id;
   const payload = JSON.parse(event.postback.payload);
-  const { id, title } = payload;
+  const { id, title, city } = payload;
 
   await fbSdk.sendMessage({
     userId,
-    text: `Thanks for helping!  ${title}`
+    text: `Thanks for helping answer questions for **${city}**!\n\n${title}`
   });
 
   // TODO save to userDb
