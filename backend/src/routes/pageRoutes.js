@@ -68,9 +68,16 @@ routes.post('/webhook', (req, res) => {
       entry.messaging.forEach(event => {
         initBot();
 
+        console.log('********************');
+        console.log('event', JSON.stringify(event, null, 2))
+        console.log('********************');
+
         if (event.message.text == "Quick_Replies") {
           answer(event);
         } else if ( event.postback ) {
+          console.log('********************');
+          console.log('postback check');
+          console.log('********************');
           generic(event);
         }
         if (event.message && event.message.text) {

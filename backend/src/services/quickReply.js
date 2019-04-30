@@ -41,7 +41,6 @@ const answer = async (event) =>{
         } 
     }   
 
-    console.log('check text is here ', text)
   
     try {
         await axios.post(
