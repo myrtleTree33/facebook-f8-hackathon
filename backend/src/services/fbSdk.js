@@ -30,7 +30,7 @@ async function sendQuestions({ userId, title, buttonArr = [] }) {
   });
 
   try {
-    await Axios.post(
+    await axios.post(
       `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
       {
         recipient: {
