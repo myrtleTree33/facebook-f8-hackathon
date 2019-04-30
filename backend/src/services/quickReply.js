@@ -1,4 +1,8 @@
 import axios from 'axios';
+const {
+    PAGE_ACCESS_TOKEN
+} = process.env;
+
 
 const answer = async (event) =>{
     console.log('********************');
