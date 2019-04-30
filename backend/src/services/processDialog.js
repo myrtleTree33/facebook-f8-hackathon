@@ -120,10 +120,11 @@ export default async event => {
         { citiesTraveled: cities },
         { upsert: true, new: true }
       );
-      return sendTextMessage(
+      await sendTextMessage(
         userId,
         `OK!  You're interested in traveling to ${cities}.  Let's begin! (:`
       );
+      await botSdk.askQuestions({ userId, maxNum: 3 });
     }
 
     return sendTextMessage(userId, 'Which have you traveled to?');
