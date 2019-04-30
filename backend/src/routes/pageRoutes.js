@@ -3,8 +3,8 @@ import logger from '../logger';
 import Question from '../models/Question';
 import processDialog from '../services/processDialog';
 import initBot from '.././services/initChatbot';
-import generic from '.././services/messageTemplates';
-import answer from '.././services/quickReply';
+import processGeneric from '.././services/messageTemplates';
+import checkDoBasicQuestion from '.././utils/doBasicQuestion';
 
 const routes = Router();
 
@@ -60,7 +60,7 @@ routes.get('/webhook', (req, res, next) => {
   res.send('wrong token');
 });
 
-routes.post('/webhook', (req, res) => {
+routes.post('/webhook', async (req, res) => {
   const { body } = req;
 
   if (body.object === 'page') {
@@ -72,27 +72,21 @@ routes.post('/webhook', (req, res) => {
         console.log('event', JSON.stringify(event, null, 2));
         console.log('********************');
 
-        if (event.message.text == "Quick_Replies") {
-          answer(event);
-        } 
-        // else if ( event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD' ) {
-        //   console.log('********************');
-        //   console.log('postback check');
-        //   console.log('********************');
-        //   generic(event);
-        // }
-
         if (event.message && event.message.text) {
           // Do not process if sender is the BOT ID
-          if (event.sender.id !== BOT_ID) {
-            console.log('********************');
-            console.log(event);
-            console.log('********************');
-            processDialog(event);
+          
+          if( await checkDoBasicQuestion(event.sender.id) ){
+              processGeneric(event);
+          } else if (event.sender.id !== BOT_ID){
+              console.log('********************');
+              console.log(event);
+              console.log('********************');
+              processDialog(event);
           }
+          
         } else if (event.postback && event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD') {
           // TODO here ---------------------------
-          // processGeneric(event);
+          processGeneric(event);
         }
       });
     });
