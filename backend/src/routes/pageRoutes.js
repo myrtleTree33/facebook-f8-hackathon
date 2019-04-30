@@ -75,23 +75,20 @@ routes.post('/webhook', async (req, res) => {
         if (event.message && event.message.text) {
           // Do not process if sender is the BOT ID
           // (async () =>{
-          if( await checkDoBasicQuestion(event.sender.id) ){
-              processGeneric(event);
-          } else if (event.sender.id !== BOT_ID){
-              console.log('********************');
-              console.log(event);
-              console.log('********************');
-              processDialog(event);
+          if (event.sender.id !== BOT_ID) {
+            console.log('********************');
+            console.log(event);
+            console.log('********************');
+            processDialog(event);
+            // } else if (checkDoBasicQuestion(event.sender.id)) {
+            //   processGeneric(event);
           }
-        
-          // })();
 
-            
+          // })();
         } else if (event.postback && event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD') {
           // TODO here ---------------------------
           processGeneric(event);
         }
-          
       });
     });
 

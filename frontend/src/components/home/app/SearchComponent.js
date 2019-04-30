@@ -53,16 +53,21 @@ class SearchComponent extends Component {
     return (
       <Segment>
         <h1>Travelyay</h1>
-        <Search
-          loading={isLoading}
-          onResultSelect={this.handleResultSelect}
-          onSearchChange={_.debounce(this.handleSearchChange, 100, {
-            leading: true
-          })}
-          results={results}
-          value={value}
-          {...this.props}
-        />
+        <Container>
+          <Search
+            fluid
+            placeholder="Search for a city!"
+            input={{ fluid: true }}
+            loading={isLoading}
+            onResultSelect={this.handleResultSelect}
+            onSearchChange={_.debounce(this.handleSearchChange, 100, {
+              leading: true
+            })}
+            results={results}
+            value={value}
+            {...this.props}
+          />
+        </Container>
       </Segment>
     );
   }
