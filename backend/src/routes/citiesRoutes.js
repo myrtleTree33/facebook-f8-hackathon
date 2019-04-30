@@ -24,7 +24,7 @@ routes.get('/cities', async (req, res, next) => {
       $regex: _.escapeRegExp(query),
       $options: ''
     }
-  }).limit(1000);
+  }).limit(50);
 
   return res.json(cities);
 });
