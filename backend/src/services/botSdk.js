@@ -1,9 +1,10 @@
+import randomInt from 'random-int';
+import _ from 'lodash';
+
 import Question from '../models/Question';
 import fbSdk from './fbSdk';
 import logger from '../logger';
-import { brotliDecompressSync } from 'zlib';
 import User from '../models/User';
-import randomInt from 'random-int';
 
 function prettyPrintQns(questions) {
   const result = [];
