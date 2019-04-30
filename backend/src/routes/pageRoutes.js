@@ -74,7 +74,7 @@ routes.post('/webhook', (req, res) => {
 
         if (event.message.text == "Quick_Replies") {
           answer(event);
-        } else if ( event.postback ) {
+        } else if ( event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD' ) {
           console.log('********************');
           console.log('postback check');
           console.log('********************');
