@@ -1,4 +1,4 @@
-const messageTemplates = (event) =>{
+const generic = (event) =>{
 
     console.log('********************');
     console.log("RECEIVED POSTBACK IT WORKS");
@@ -6,4 +6,4 @@ const messageTemplates = (event) =>{
     console.log('********************');
 }
 
-export default messageTemplates;
+export default generic;

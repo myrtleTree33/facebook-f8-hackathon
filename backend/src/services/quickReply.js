@@ -1,4 +1,4 @@
-const quickReply = (event) =>{
+const answer = (event) =>{
     console.log('********************');
     console.log("quickReply test")
     console.log('event', event)
@@ -6,4 +6,4 @@ const quickReply = (event) =>{
 
 }
 
-export default quickReply;
+export default answer;
