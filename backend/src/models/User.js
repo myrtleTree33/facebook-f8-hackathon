@@ -32,6 +32,9 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
     select: false
+  },
+  currQn: {
+    type: Object
   }
 });
 
