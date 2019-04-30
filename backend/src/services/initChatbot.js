@@ -7,7 +7,7 @@ const {
 const makeGreeting = () =>{
     // console.log('makeGreeting')
     try {
-        await axios.post( 
+        axios.post( 
             `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
             {
                 "greeting":[
@@ -28,10 +28,10 @@ const makeGreeting = () =>{
     }
 }
 
-const makePersistantMenu = async () => {
+const makePersistantMenu = () => {
     // console.log("makePersistantMenu");
     try {
-        await axios.post( 
+        axios.post( 
             `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
             {
                 "persistent_menu":[
