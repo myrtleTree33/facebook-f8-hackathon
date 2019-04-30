@@ -160,6 +160,9 @@ export default async event => {
     fbSdk.sendMessage({ userId, text: 'Thanks for contributing!' });
     logger.info('Saved user answer!');
 
+    // Remove qn
+    await User.findOneAndUpdate({ userId }, { currQn: null }, { upsert: true, new: true });
+
     // Ask another question
     setTimeout(() => {
       (async () => {
