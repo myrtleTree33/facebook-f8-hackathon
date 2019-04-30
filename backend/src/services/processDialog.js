@@ -144,6 +144,16 @@ export default async event => {
     return;
   }
 
+  // For don't know
+  if (intentName === 'DONT_KNOW_ANS') {
+    fbSdk.sendMessage({
+      userId,
+      text: `Okay.  I'm sorry.  Let's try another question.`
+    });
+    botSdk.askQuestions({ userId, maxNum: 3 });
+    return;
+  }
+
   if (intentName === 'WELCOME') {
     return; // Ignore as we have already sent welcome message
   }
