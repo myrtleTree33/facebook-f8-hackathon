@@ -1,7 +1,22 @@
 import Question from '../models/Question';
+import fbSdk from './fbSdk';
 
-// async function askQuestion({ userId, maxNum = 3 }) {
-//   const question = Question.findOne({}).limit(maxNum);
+async function askQuestion({ userId, maxNum = 3 }) {
+  const questions = await Question.find({}).limit(maxNum);
 
-//   const { question } = req.body;
-// }
+  const questions2 = questions.map(q => {
+    return {
+      title: q.text,
+      payload: {
+        id: q.questionId,
+        title: q.text
+      }
+    };
+  });
+
+  return fbSdk.sendQuestions({
+    userId,
+    title: 'Can you help us?',
+    btnArr: questions2
+  });
+}

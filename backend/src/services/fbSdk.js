@@ -4,11 +4,11 @@ import Axios from 'axios';
 const { PAGE_ACCESS_TOKEN } = process.env;
 
 async function sendQuestions({ userId, title, buttonArr = [] }) {
-  const buttons = buttonArr.map(btnText => {
+  const buttons = buttonArr.map(btn => {
     return {
       type: 'postback',
-      title: btnText,
-      payload: 'QUESTION'
+      title: btn.title,
+      payload: btn.payload
     };
   });
 
