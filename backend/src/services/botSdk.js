@@ -28,7 +28,7 @@ async function askQuestions({ userId, maxNum = 3 }) {
 
   const qnPrompt = 'Can you help us with the following questions?\n\n' + prettyPrintQns(questions);
 
-  await fbSdk.sendMessage(qnPrompt);
+  await fbSdk.sendMessage({ userId, text: qnPrompt });
 
   return fbSdk.sendQuestions({
     userId,
