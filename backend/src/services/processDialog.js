@@ -134,6 +134,15 @@ export default async event => {
   console.log('GOT HERE -------------------------');
   console.log('GOT HERE -------------------------');
 
+  // To ask for help here
+  if (intentName === 'FIND_INFO') {
+    fbSdk.sendMessage({
+      userId,
+      text: `Thanks for asking!  You might be keen to take a look at our crowdsourced information on www.travelyay.co.  Keen for a look?`
+    });
+    return;
+  }
+
   if (intentName === 'WELCOME') {
     return; // Ignore as we have already sent welcome message
   }
