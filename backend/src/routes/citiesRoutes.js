@@ -24,9 +24,9 @@ routes.get('/cities', async (req, res, next) => {
       $regex: _.escapeRegExp(query),
       $options: ''
     }
-  }).limit(50);
+  }).limit(10);
 
-  return res.json(cities);
+  return res.json(_.reverse(cities));
 });
 
 export default routes;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import _ from "lodash";
+import ky from "ky";
 
 import PropTypes from "prop-types";
 import { Container, Segment, Search } from "semantic-ui-react";
@@ -18,7 +19,7 @@ class SearchComponent extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.setState({ value: result.title });
-    console.log(result.title);
+    console.log(result.cityName);
   };
 
   handleSearchChange = (e, { value }) => {
@@ -30,11 +31,17 @@ class SearchComponent extends Component {
         if (value.length < 1) return this.resetComponent();
 
         // TODO fill in for fetch
-        const source = [];
+        const source = await ky
+          .get(`https://travelyay.localtunnel.me/cities/cities?q=${value}`, {})
+          .json();
+
+        const results = source.map(s => {
+          return { ...s, title: s.cityName };
+        });
 
         this.setState({
           isLoading: false,
-          results: source
+          results
         });
       })();
     }, 300);
@@ -49,7 +56,7 @@ class SearchComponent extends Component {
         <Search
           loading={isLoading}
           onResultSelect={this.handleResultSelect}
-          onSearchChange={_.debounce(this.handleSearchChange, 500, {
+          onSearchChange={_.debounce(this.handleSearchChange, 100, {
             leading: true
           })}
           results={results}
