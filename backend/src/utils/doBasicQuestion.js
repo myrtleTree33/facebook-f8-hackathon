@@ -1,10 +1,8 @@
 import User from '../models/User';
 
 
-const checkDoBasicQuestion = await (userId) => {
-    
-    
-    // (async () =>{
+const checkDoBasicQuestion = (userId) => {
+       
     const user = await User.findOne({
         userId
     });
@@ -18,7 +16,6 @@ const checkDoBasicQuestion = await (userId) => {
     // goto mongo
     // check db's three records
     // return true or false
-    // }) ()
     
 };
   
