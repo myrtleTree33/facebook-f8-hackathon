@@ -1,6 +1,6 @@
 // load environment variables
 const dotenv = require('dotenv');
-dotenv.load();
+dotenv.config();
 
 import https from 'https';
 import fs from 'fs';
