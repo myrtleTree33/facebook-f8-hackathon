@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import Qustion from '../models/Question';
 
 const routes = Router();
 
@@ -9,19 +10,16 @@ routes.get('/', (req, res) => {
   res.json({ message: 'Welcome to starter-backend!' });
 });
 
+/**
+ * INSERT QUESTION
+ */
+
 routes.post('/question', (req, res) => {
 
   const qustion = req.body;
   Qustion.insert( { qustion } )
 
-  // res.json(Qustion.find());
-  res.json({ message: 'question' });
-
-})
-.get('/question', (req, res) => {
-
-
-  res.json({ message: 'question' });
+  res.json(Qustion.find());
 
 });
 
