@@ -64,7 +64,7 @@ export default async event => {
   const result = results[0].queryResult;
   console.log(JSON.stringify(result));
 
-  const intentName = result.intent && result.intent.displayName;
+  const intentName = result && result.intent && result.intent.displayName;
 
   // Do actual logic here
 
