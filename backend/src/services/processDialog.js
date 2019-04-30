@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 import dialogflow from 'dialogflow';
 import axios from 'axios';
 import User from '../models/User';
+import geocodeService from './geocodeService';
 
 const {
   PROJECT_ID,
@@ -86,36 +87,39 @@ export default async event => {
 
   if (!user.cities || !user.cities.length) {
     if (intentName === 'CITIES') {
-      await User.findOneAndUpdate({ userId }, { cities: [message] }, { upsert: true, new: true });
+      const cities = geocodeService.findCities(message);
+      await User.findOneAndUpdate({ userId }, { cities }, { upsert: true, new: true });
       return sendTextMessage(
         userId,
-        `OK!  I've set your home city to ${message}.  Which cities are you keen to explore?`
+        `OK!  I've set your home city to ${cities}.  Which cities are you keen to explore?`
       );
     }
     return sendTextMessage(userId, 'Which city do you live in?');
   } else if (!user.citiesInterested || !user.citiesInterested.length) {
     if (intentName === 'CITIES') {
+      const cities = geocodeService.findCities(message);
       await User.findOneAndUpdate(
         { userId },
-        { citiesInterested: [message] },
+        { citiesInterested: cities },
         { upsert: true, new: true }
       );
       return sendTextMessage(
         userId,
-        `OK!  You're interested in exploring ${message}.  Which cities have you visited?`
+        `OK!  You're interested in exploring ${cities}.  Which cities have you visited?`
       );
     }
     return sendTextMessage(userId, 'Which cities are you keen to explore?');
   } else if (!user.citiesTraveled || !user.citiesTraveled.length) {
     if (intentName === 'CITIES') {
+      const cities = geocodeService.findCities(message);
       await User.findOneAndUpdate(
         { userId },
-        { citiesTraveled: [message] },
+        { citiesTraveled: cities },
         { upsert: true, new: true }
       );
       return sendTextMessage(
         userId,
-        `OK!  You're interested in traveling ${message}.  Let's begin! (:`
+        `OK!  You're interested in traveling to ${cities}.  Let's begin! (:`
       );
     }
     return sendTextMessage(userId, 'Which have you traveled to?');
