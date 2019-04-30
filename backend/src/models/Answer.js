@@ -7,7 +7,23 @@ let mongooseHidden = require('mongoose-hidden')();
 
 const { Schema } = mongoose;
 
+function genId() {
+  const LENGTH = 15;
+  let result = '';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < LENGTH; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 const answerSchema = new Schema({
+  answerId: {
+    type: String,
+    required: true,
+    default: genId
+  },
   questionId: {
     type: String,
     required: true
@@ -23,8 +39,7 @@ const answerSchema = new Schema({
   dateCreated: {
     type: Date,
     required: true,
-    default: Date.now,
-    select: false
+    default: Date.now
   }
 });
 

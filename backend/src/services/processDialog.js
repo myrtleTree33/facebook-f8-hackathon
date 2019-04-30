@@ -6,6 +6,8 @@ import geocodeService from './geocodeService';
 import Question from '../models/Question';
 import fbSdk from './fbSdk';
 import botSdk from './botSdk';
+import Answer from '../models/Answer';
+import logger from '../logger';
 
 const {
   PROJECT_ID,
@@ -145,6 +147,15 @@ export default async event => {
   }
 
   // Else, store the bot answers
+  const { questionId } = currQn;
+  if (message && message !== '') {
+    await new Answer({
+      questionId,
+      userId,
+      text: message
+    }).save();
+  }
+  logger.info('Saved user answer!');
 
   // Else, continue asking question logic here
   // await botSdk.askQuestions({ userId, maxNum: 3 });

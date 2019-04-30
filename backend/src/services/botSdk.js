@@ -62,8 +62,6 @@ async function processPostback(event) {
     userId,
     text: `Thanks for helping answer questions for **${city}**!\n\n${title}`
   });
-
-  // TODO save to userDb
 }
 
 export default {
