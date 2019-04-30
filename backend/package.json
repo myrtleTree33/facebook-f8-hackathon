@@ -52,6 +52,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.3",
+    "random-int": "^2.0.0",
     "remove-accents": "^0.4.2",
     "rimraf": "^2.6.2",
     "winston": "^3.1.0"

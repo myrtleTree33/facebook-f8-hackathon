@@ -2,6 +2,8 @@ import Question from '../models/Question';
 import fbSdk from './fbSdk';
 import logger from '../logger';
 import { brotliDecompressSync } from 'zlib';
+import User from '../models/User';
+import randomInt from 'random-int';
 
 function prettyPrintQns(questions) {
   const result = [];
@@ -15,6 +17,7 @@ function prettyPrintQns(questions) {
 async function askQuestions({ userId, maxNum = 3 }) {
   const questions = await Question.find({}).limit(maxNum);
 
+  // format questions
   const questions2 = questions.map((q, i) => {
     return {
       title: `Answer qn. ${i}`,
@@ -25,10 +28,14 @@ async function askQuestions({ userId, maxNum = 3 }) {
     };
   });
 
+  // retrieve current user
+  const user = await User.findOne({ userId });
+  const city = user.citiesInterested[randomInt(0, user.citiesInterested.length - 1)];
+
   logger.info(`Asking questions=${JSON.stringify(questions2)}`);
 
   const qnPrompt =
-    'Can you help us answer the following questions?\n\n' + prettyPrintQns(questions);
+    `Can you help us answer the following questions for ${city}?\n\n` + prettyPrintQns(questions);
 
   await fbSdk.sendMessage({ userId, text: qnPrompt });
 
