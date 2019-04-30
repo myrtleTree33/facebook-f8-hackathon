@@ -17,20 +17,15 @@ routes.get('/', (req, res) => {
 routes.post('/question', (req, res) => {
 
   const qustion = req.body;
-  res.json(questions);
 
-  // Qustion.insert( { qustion } )
-  // let newvalue = new Qustion( { qustion } );
-  // dbo.collection("customers").find({}).toArray(function(err, result) {
-  //   if (err) throw err;
-  //   console.log(result);
-  //   db.close();
-  // });
-  // const tmp = Qustion.find({}).toArray((err, result)=>{
-  //   if (err) throw err;
-  //   console.log(result);
+  console.log('question', question);
+  Qustion.insert( { qustion } )
 
-  // })
+  Qustion.find({}).toArray((err, result)=>{
+    if (err) throw err;
+    console.log('result', result);
+  })
+  res.json(question);
 
   // Qustion.find(function(err, questions){
   //   if(err) return res.status(500).send({error: 'database failure'});
