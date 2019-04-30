@@ -1,20 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Container, Segment } from "semantic-ui-react";
 import SearchComponent from "./SearchComponent";
 
-const App = () => {
-  const handleQuery = item => {
-    console.log(item);
-  };
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleQuery = this.handleQuery.bind(this);
+  }
 
-  return (
-    <div>
-      <Container>
-        <SearchComponent onQuery={handleQuery} />
-      </Container>
-    </div>
-  );
+  handleQuery(item) {
+    console.log(item);
+  }
+
+  async componentDidMount() {}
+
+  render() {
+    return (
+      <div>
+        <Container>
+          <SearchComponent onQuery={this.handleQuery} />
+          {/* <Result items={items} /> */}
+        </Container>
+      </div>
+    );
+  }
+}
+
+App.propTypes = {
+  //   name: PropTypes.string.isRequired
 };
 
 export default App;

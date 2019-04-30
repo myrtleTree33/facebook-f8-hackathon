@@ -16,7 +16,7 @@ routes.get('/cities', async (req, res, next) => {
 
   // empty set
   if (query === '') {
-    return res.json([]);
+    return res.jsonp([]);
   }
 
   console.log(`City query=${query}`);
@@ -28,7 +28,7 @@ routes.get('/cities', async (req, res, next) => {
     }
   }).limit(10);
 
-  return res.json(_.reverse(cities));
+  return res.jsonp(_.reverse(cities));
 });
 
 routes.post('/info', async (req, res, next) => {
@@ -51,7 +51,7 @@ routes.post('/info', async (req, res, next) => {
     };
   });
 
-  return res.json(result);
+  return res.jsonp(result);
 });
 
 export default routes;
