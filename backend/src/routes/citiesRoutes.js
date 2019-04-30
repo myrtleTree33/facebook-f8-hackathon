@@ -33,7 +33,7 @@ routes.get('/cities', async (req, res, next) => {
 
 routes.post('/info', async (req, res, next) => {
   const { city } = req.body;
-  const answers = await Answer.find({ city });
+  const answers = await Answer.find({ city }).lean();
 
   const questionPromises = answers.map(answer => {
     const { questionId } = answer;
