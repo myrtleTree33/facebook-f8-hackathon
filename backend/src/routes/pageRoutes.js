@@ -63,9 +63,9 @@ routes.get('/webhook', (req, res, next) => {
 routes.post('/webhook', (req, res) => {
   const { body } = req;
 
-  if (req.body.object === 'page') {
-    req.body.entry.forEach(entry => {
-      entry.messaging.forEach(event => {
+  if (body.object === 'page') {
+    body.entry.forEach(elem => {
+      elem.messaging.forEach(event => {
         // initBot();
 
         console.log('********************');
