@@ -19,7 +19,12 @@ routes.post('/question', (req, res) => {
   const qustion = req.body;
   // Qustion.insert( { qustion } )
   let newvalue = new Qustion( { qustion } );
-  res.json(Qustion.find());
+  
+  Qustion.find({}).toArray((err, result)=>{
+    if (err) throw err;
+    res.json(result);
+
+  })
   // res.json(Qustion.find());
 
 });
