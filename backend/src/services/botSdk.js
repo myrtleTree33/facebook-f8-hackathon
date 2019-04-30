@@ -1,5 +1,6 @@
 import Question from '../models/Question';
 import fbSdk from './fbSdk';
+import logger from '../logger';
 
 async function askQuestions({ userId, maxNum = 3 }) {
   const questions = await Question.find({}).limit(maxNum);
@@ -13,6 +14,8 @@ async function askQuestions({ userId, maxNum = 3 }) {
       }
     };
   });
+
+  logger.info(`Asking questions=${JSON.stringify(questions2)}`);
 
   return fbSdk.sendQuestions({
     userId,
