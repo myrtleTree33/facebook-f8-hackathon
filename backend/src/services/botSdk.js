@@ -8,10 +8,10 @@ async function askQuestions({ userId, maxNum = 3 }) {
   const questions2 = questions.map(q => {
     return {
       title: q.text,
-      payload: {
+      payload: JSON.stringify({
         id: q.questionId,
         title: q.text
-      }
+      })
     };
   });
 
