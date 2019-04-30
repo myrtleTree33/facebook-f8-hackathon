@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import _ from 'lodash';
 import City from '../models/City';
+import Answer from '../models/Answer';
+import Question from '../models/Question';
 
 const routes = Router();
 
@@ -27,6 +29,29 @@ routes.get('/cities', async (req, res, next) => {
   }).limit(10);
 
   return res.json(_.reverse(cities));
+});
+
+routes.post('/info', async (req, res, next) => {
+  const { city } = req.body;
+  const answers = await Answer.find({ city });
+
+  const questionPromises = answers.map(answer => {
+    const { questionId } = answer;
+    return Question.findOne({ questionId });
+  });
+
+  const questions = await Promise.all(questionPromises);
+  const questionsMap = Object.assign({}, ...questions.map(p => ({ [p.questionId]: p.text })));
+  console.log(questionsMap);
+
+  const result = answers.map((answer, i) => {
+    return {
+      ...answer,
+      text: questionsMap[answer.questionId]
+    };
+  });
+
+  return res.json(result);
 });
 
 export default routes;

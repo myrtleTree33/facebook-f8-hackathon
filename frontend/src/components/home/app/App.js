@@ -4,10 +4,14 @@ import { Container, Segment } from "semantic-ui-react";
 import SearchComponent from "./SearchComponent";
 
 const App = () => {
+  const handleQuery = item => {
+    console.log(item);
+  };
+
   return (
     <div>
       <Container>
-        <SearchComponent />
+        <SearchComponent onQuery={handleQuery} />
       </Container>
     </div>
   );

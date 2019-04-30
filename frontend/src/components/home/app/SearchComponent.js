@@ -5,6 +5,8 @@ import ky from "ky";
 import PropTypes from "prop-types";
 import { Container, Segment, Search } from "semantic-ui-react";
 
+const { REACT_APP_BACKEND_URL } = process.env;
+
 class SearchComponent extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +21,7 @@ class SearchComponent extends Component {
 
   handleResultSelect = (e, { result }) => {
     this.setState({ value: result.title });
-    console.log(result.cityName);
+    this.props.onQuery(result);
   };
 
   handleSearchChange = (e, { value }) => {
@@ -32,7 +34,7 @@ class SearchComponent extends Component {
 
         // TODO fill in for fetch
         const source = await ky
-          .get(`https://travelyay.localtunnel.me/cities/cities?q=${value}`, {})
+          .get(`${REACT_APP_BACKEND_URL}/cities/cities?q=${value}`, {})
           .json();
 
         const results = source.map(s => {
