@@ -92,7 +92,7 @@ export default async event => {
         `OK!  I've set your home city to ${message}.  Which cities are you keen to explore?`
       );
     }
-    return sendTextMessage(userId, 'Where are you from?');
+    return sendTextMessage(userId, 'Which city do you live in?');
   } else if (!user.citiesInterested || !user.citiesInterested.length) {
     if (intentName === 'CITIES') {
       await User.findOneAndUpdate(
