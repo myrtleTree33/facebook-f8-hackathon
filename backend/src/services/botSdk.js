@@ -16,9 +16,9 @@ async function askQuestions({ userId, maxNum = 3 }) {
 
   const questions2 = questions.map((q, i) => {
     return {
-      title: q.text,
+      title: `Question ${i}`,
       payload: JSON.stringify({
-        id: `Question ${i}`,
+        id: q.questionId,
         title: q.text
       })
     };
