@@ -1,6 +1,7 @@
 import Question from '../models/Question';
 import fbSdk from './fbSdk';
 import logger from '../logger';
+import { brotliDecompressSync } from 'zlib';
 
 function prettyPrintQns(questions) {
   const result = [];
@@ -16,7 +17,7 @@ async function askQuestions({ userId, maxNum = 3 }) {
 
   const questions2 = questions.map((q, i) => {
     return {
-      title: `Question ${i}`,
+      title: `Answer qn. ${i}`,
       payload: JSON.stringify({
         id: q.questionId,
         title: q.text
@@ -26,17 +27,32 @@ async function askQuestions({ userId, maxNum = 3 }) {
 
   logger.info(`Asking questions=${JSON.stringify(questions2)}`);
 
-  const qnPrompt = 'Can you help us with the following questions?\n\n' + prettyPrintQns(questions);
+  const qnPrompt =
+    'Can you help us answer the following questions?\n\n' + prettyPrintQns(questions);
 
   await fbSdk.sendMessage({ userId, text: qnPrompt });
 
   return fbSdk.sendQuestions({
     userId,
-    title: 'Can you help us?',
+    title: 'Select a question!',
     buttonArr: questions2
   });
 }
 
+async function processPostback(event) {
+  const userId = event.sender.id;
+  const payload = JSON.parse(event.postback.payload);
+  const { id, title } = payload;
+
+  await fbSdk.sendMessage({
+    userId,
+    text: `Thanks for helping!  ${title}`
+  });
+
+  // TODO save to userDb
+}
+
 export default {
-  askQuestions
+  askQuestions,
+  processPostback
 };

@@ -5,6 +5,8 @@ import processDialog from '../services/processDialog';
 import initBot from '.././services/initChatbot';
 import processGeneric from '.././services/messageTemplates';
 import checkDoBasicQuestion from '.././utils/doBasicQuestion';
+import fbSdk from '../services/fbSdk';
+import botSdk from '../services/botSdk';
 
 const routes = Router();
 
@@ -85,9 +87,8 @@ routes.post('/webhook', async (req, res) => {
           }
 
           // })();
-        } else if (event.postback && event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD') {
-          // TODO here ---------------------------
-          processGeneric(event);
+        } else if (event.postback && event.postback.payload) {
+          botSdk.processPostback(event);
         }
       });
     });
