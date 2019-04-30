@@ -3,7 +3,7 @@ import User from '../models/User';
 
 const checkDoBasicQuestion = (userId) => {
        
-    const user = await User.findOne({
+    const user = User.findOne({
         userId
     });
 
@@ -16,7 +16,7 @@ const checkDoBasicQuestion = (userId) => {
     // goto mongo
     // check db's three records
     // return true or false
-    
+
 };
   
 export default checkDoBasicQuestion;
