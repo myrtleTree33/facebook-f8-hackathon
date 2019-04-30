@@ -123,6 +123,7 @@ export default async event => {
         `OK!  You're interested in traveling to ${cities}.  Let's begin! (:`
       );
     }
+
     return sendTextMessage(userId, 'Which have you traveled to?');
   }
 
@@ -135,8 +136,18 @@ export default async event => {
     return; // Ignore as we have already sent welcome message
   }
 
+  // Find a user, then retrieve if user has a prev
+  // qn state.  If so, then answer.
+  const { currQn } = user;
+  if (!currQn) {
+    await botSdk.askQuestions({ userId, maxNum: 3 });
+    return;
+  }
+
+  // Else, store the bot answers
+
   // Else, continue asking question logic here
-  await botSdk.askQuestions({ userId, maxNum: 3 });
+  // await botSdk.askQuestions({ userId, maxNum: 3 });
 
   sendTextMessage(userId, result.fulfillmentText);
 };

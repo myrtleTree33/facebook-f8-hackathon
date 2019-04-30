@@ -51,6 +51,13 @@ async function processPostback(event) {
   const payload = JSON.parse(event.postback.payload);
   const { id, title, city } = payload;
 
+  // Save question state to user, as context
+  const user = await User.findOneAndUpdate(
+    { userId },
+    { currQn: { id, title, city } },
+    { upsert: true, new: true }
+  );
+
   await fbSdk.sendMessage({
     userId,
     text: `Thanks for helping answer questions for **${city}**!\n\n${title}`
