@@ -79,7 +79,9 @@ export default async event => {
     user = await user.save();
   }
 
-  console.log('GOT HERE!!! ----------------------');
+  if (intentName === 'WELCOME') {
+    sendTextMessage(userId, result.fulfillmentText);
+  }
 
   if (!user.cities || !user.cities.length) {
     if (intentName === 'CITIES') {
@@ -115,7 +117,7 @@ export default async event => {
         `OK!  You're interested in traveling ${message}.  Let's begin! (:`
       );
     }
-    return sendTextMessage(userId, 'Which have you travled to?');
+    return sendTextMessage(userId, 'Which have you traveled to?');
   }
 
   sendTextMessage(userId, result.fulfillmentText);
