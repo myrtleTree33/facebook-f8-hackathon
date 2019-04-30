@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const {
     PAGE_ACCESS_TOKEN
-  } = process.env;
+} = process.env;
 
 const makeGreeting = () =>{
     // console.log('makeGreeting')
