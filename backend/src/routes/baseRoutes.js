@@ -17,6 +17,8 @@ routes.get('/', (req, res) => {
 routes.post('/question', (req, res) => {
 
   const qustion = req.body;
+  res.json(questions);
+
   // Qustion.insert( { qustion } )
   // let newvalue = new Qustion( { qustion } );
   // dbo.collection("customers").find({}).toArray(function(err, result) {
@@ -30,10 +32,10 @@ routes.post('/question', (req, res) => {
 
   // })
 
-  Qustion.find(function(err, questions){
-    if(err) return res.status(500).send({error: 'database failure'});
-    res.json(questions);
-  })
+  // Qustion.find(function(err, questions){
+  //   if(err) return res.status(500).send({error: 'database failure'});
+  //   res.json(questions);
+  // })
 
   
 });
