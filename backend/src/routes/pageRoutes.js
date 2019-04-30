@@ -3,6 +3,8 @@ import logger from '../logger';
 import Question from '../models/Question';
 import processDialog from '../services/processDialog';
 import initBot from '.././services/initChatbot';
+import messageTemplate from '.././services/messageTemplate';
+import quickReply from '.././services/quickReply';
 
 const routes = Router();
 
@@ -66,6 +68,11 @@ routes.post('/webhook', (req, res) => {
       entry.messaging.forEach(event => {
         initBot();
 
+        if (event.message.text == "Quick_Replies") {
+          quickReply(event);
+        } else if ( event.postback ) {
+          messageTemplate(event);
+        }
         if (event.message && event.message.text) {
           // Do not process if sender is the BOT ID
           if (event.sender.id !== BOT_ID) {
