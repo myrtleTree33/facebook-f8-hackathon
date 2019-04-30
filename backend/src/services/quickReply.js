@@ -37,25 +37,29 @@ const answer = (event) =>{
     }
 
 
-
-
-    axios.post(
-        `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
-        {
-            messaging_type: 'RESPONSE',
-            recipient: {
-                id: event.sender.id
-            },
-            message: {
-                text
+  
+    try {
+        axios.post(
+            `https://graph.facebook.com/v3.2/me/messages?access_token=${PAGE_ACCESS_TOKEN}`,
+            {
+                messaging_type: 'RESPONSE',
+                recipient: {
+                    id: event.sender.id
+                },
+                message: {
+                    text
+                }
             }
-        }
-    ).then((response) => {
-        console.log('response', response);
-    })
-    .catch((error) => {
-        console.log('error', error);
-    });
+        ).then((response) => {
+            console.log('response', response);
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+
+    } catch (e) {
+        console.log('error in quickReply', e);
+    }
     
 }
 
