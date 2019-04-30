@@ -18,7 +18,7 @@ function prettyPrintQns(questions) {
 async function askQuestions({ userId, maxNum = 3 }) {
   // retrieve current user
   const user = await User.findOne({ userId });
-  const city = user.citiesInterested[randomInt(0, user.citiesInterested.length - 1)];
+  const city = user.citiesTraveled[randomInt(0, user.citiesTraveled.length - 1)];
   const questions = _.shuffle(await Question.find({})).slice(0, 3);
 
   // format questions
