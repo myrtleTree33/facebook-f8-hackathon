@@ -5,6 +5,9 @@ const { PAGE_ACCESS_TOKEN } = process.env;
 
 async function sendQuestions({ userId, title, buttonArr = [] }) {
   const buttons = buttonArr.map(btnText => {
+    console.log('***************');
+    console.log(btnText);
+    console.log('***************');
     return {
       type: 'postback',
       title: btnText,
@@ -32,7 +35,7 @@ async function sendQuestions({ userId, title, buttonArr = [] }) {
       }
     );
   } catch (e) {
-    logger.error(e);
+    // logger.error(e);
   }
 }
 
