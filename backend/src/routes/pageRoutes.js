@@ -89,6 +89,9 @@ routes.post('/webhook', (req, res) => {
             console.log('********************');
             processDialog(event);
           }
+        } else if (event.postback && event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD') {
+          // TODO here ---------------------------
+          // processGeneric(event);
         }
       });
     });
