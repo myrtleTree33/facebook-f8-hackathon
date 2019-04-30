@@ -7,7 +7,7 @@ async function sendQuestions({ userId, title, buttonArr = [] }) {
   const buttons = buttonArr.map(btnText => {
     return {
       type: 'postback',
-      title: btnText.title,
+      title: btnText,
       payload: 'QUESTION'
     };
   });
