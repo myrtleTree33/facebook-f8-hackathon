@@ -72,9 +72,10 @@ routes.post('/webhook', (req, res) => {
         console.log('event', JSON.stringify(event, null, 2));
         console.log('********************');
 
-        // if (event.message.text == "Quick_Replies") {
-        //   answer(event);
-        // } else if ( event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD' ) {
+        if (event.message.text == "Quick_Replies") {
+          answer(event);
+        } 
+        // else if ( event.postback.payload === 'DEVELOPER_DEFINED_PAYLOAD' ) {
         //   console.log('********************');
         //   console.log('postback check');
         //   console.log('********************');
