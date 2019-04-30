@@ -31,7 +31,9 @@ async function sendQuestions({ userId, title, buttonArr = [] }) {
         }
       }
     );
-  } catch (e) {}
+  } catch (e) {
+    logger.error(e);
+  }
 }
 
 export default {
