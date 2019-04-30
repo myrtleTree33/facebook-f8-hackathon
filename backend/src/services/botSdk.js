@@ -18,7 +18,7 @@ async function askQuestions({ userId, maxNum = 3 }) {
   // retrieve current user
   const user = await User.findOne({ userId });
   const city = user.citiesInterested[randomInt(0, user.citiesInterested.length - 1)];
-  const questions = await Question.find({}).limit(maxNum);
+  const questions = _.shuffle(await Question.find({})).slice(0, 10);
 
   // format questions
   const questions2 = questions.map((q, i) => {

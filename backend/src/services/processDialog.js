@@ -136,6 +136,7 @@ export default async event => {
 
   // To ask for help here
   if (intentName === 'FIND_INFO') {
+    logger.info('RECEIVED FIND INFO.');
     fbSdk.sendMessage({
       userId,
       text: `Thanks for asking!  You might be keen to take a look at our crowdsourced information on www.travelyay.co.  Keen for a look?`
