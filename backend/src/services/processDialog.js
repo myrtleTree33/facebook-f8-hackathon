@@ -157,8 +157,16 @@ export default async event => {
       city
     }).save();
 
-    fbSdk.sendMessage({ userId, text: 'Thanks for your answer!' });
+    fbSdk.sendMessage({ userId, text: 'Thanks for contributing!' });
     logger.info('Saved user answer!');
+
+    // Ask another question
+    setTimeout(() => {
+      (async () => {
+        await fbSdk.sendMessage({ userId, text: `Here's another question!` });
+        await botSdk.askQuestions({ userId, maxNum: 3 });
+      })();
+    }, 10000);
   }
 
   // Else, continue asking question logic here
