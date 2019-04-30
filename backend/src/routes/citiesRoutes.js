@@ -47,7 +47,7 @@ routes.post('/info', async (req, res, next) => {
   const result = answers.map((answer, i) => {
     return {
       ...answer,
-      text: questionsMap[answer.questionId]
+      questionText: questionsMap[answer.questionId]
     };
   });
 
