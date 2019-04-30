@@ -21,16 +21,11 @@ routes.post('/question', (req, res) => {
   console.log('question', question);
   Question.insert( { question } )
 
-  Question.find({}).toArray((err, result)=>{
-    if (err) throw err;
-    console.log('result', result);
+  Question.find(function(err, questions){
+    if(err) return res.status(500).send({error: 'database failure'});
+    console.log('questions', questions)
+    res.json(questions);
   })
-  res.json(question);
-
-  // Question.find(function(err, questions){
-  //   if(err) return res.status(500).send({error: 'database failure'});
-  //   res.json(questions);
-  // })
 
   
 });
