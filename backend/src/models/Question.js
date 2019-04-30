@@ -28,8 +28,7 @@ const questionSchema = new Schema({
   dateCreated: {
     type: Date,
     required: true,
-    default: Date.now,
-    select: false
+    default: Date.now
   }
 });
 
