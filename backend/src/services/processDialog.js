@@ -87,7 +87,7 @@ export default async event => {
 
   if (!user.cities || !user.cities.length) {
     if (intentName === 'CITIES') {
-      const cities = geocodeService.findCities(message);
+      const cities = await geocodeService.findCities(message);
       await User.findOneAndUpdate({ userId }, { cities }, { upsert: true, new: true });
       return sendTextMessage(
         userId,
@@ -97,7 +97,7 @@ export default async event => {
     return sendTextMessage(userId, 'Which city do you live in?');
   } else if (!user.citiesInterested || !user.citiesInterested.length) {
     if (intentName === 'CITIES') {
-      const cities = geocodeService.findCities(message);
+      const cities = await geocodeService.findCities(message);
       await User.findOneAndUpdate(
         { userId },
         { citiesInterested: cities },
@@ -111,7 +111,7 @@ export default async event => {
     return sendTextMessage(userId, 'Which cities are you keen to explore?');
   } else if (!user.citiesTraveled || !user.citiesTraveled.length) {
     if (intentName === 'CITIES') {
-      const cities = geocodeService.findCities(message);
+      const cities = await geocodeService.findCities(message);
       await User.findOneAndUpdate(
         { userId },
         { citiesTraveled: cities },
