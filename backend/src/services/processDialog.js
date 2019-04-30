@@ -127,6 +127,11 @@ export default async event => {
     return sendTextMessage(userId, 'Which have you traveled to?');
   }
 
+  // ----------------------
+  console.log('GOT HERE -------------------------');
+  console.log('GOT HERE -------------------------');
+  console.log('GOT HERE -------------------------');
+
   if (intentName === 'WELCOME') {
     return; // Ignore as we have already sent welcome message
   }
