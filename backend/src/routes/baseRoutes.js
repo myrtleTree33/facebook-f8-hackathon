@@ -14,17 +14,17 @@ routes.get('/', (req, res) => {
  * INSERT QUESTION
  */
 
-routes.post('/question', (req, res) => {
+routes.post('/question', async (req, res) => {
 
-  const question = req.body;
+  const {question} = req.body;
 
-  // console.log('question', question);
+  console.log('question', question);
   // Question.insert( { question } )
   
   questions = new Question({
     question
   });
-  questions.save();
+  await questions.save();
   res.json(questions);
   // Question.find(function(err, questions){
   //   if(err) return res.status(500).send({error: 'database failure'});
