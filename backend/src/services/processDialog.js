@@ -4,6 +4,7 @@ import axios from 'axios';
 import User from '../models/User';
 import geocodeService from './geocodeService';
 import Question from '../models/Question';
+import fbSdk from './fbSdk';
 
 const {
   PROJECT_ID,
@@ -129,6 +130,12 @@ export default async event => {
   if (intentName === 'WELCOME') {
     return; // Ignore as we have already sent welcome message
   }
+
+  await fbSdk.sendQuestions({
+    userId,
+    title: 'Travel questions!',
+    buttonArr: ['question 1', 'question 2']
+  });
 
   sendTextMessage(userId, result.fulfillmentText);
 };
